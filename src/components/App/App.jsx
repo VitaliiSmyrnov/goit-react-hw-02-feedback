@@ -1,6 +1,6 @@
-import { Component } from 'react';
+import React, { Component } from 'react';
 import { Section, FeedbackOptions, Statistics, Notification } from 'components';
-import { Wrapper } from './App.styled';
+import { StyledContainer, Wrapper } from './App.styled';
 
 export class App extends Component {
   state = {
@@ -34,25 +34,27 @@ export class App extends Component {
     } = this;
     return (
       <Wrapper>
-        <Section title="Please leave feedback">
-          <FeedbackOptions
-            options={state}
-            onLeaveFeedback={handleFeedbackIncrement}
-          />
-        </Section>
-        <Section title="Statistics">
-          {countTotalFeedback() ? (
-            <Statistics
-              good={good}
-              neutral={neutral}
-              bad={bad}
-              total={countTotalFeedback}
-              positivePercentage={countPositiveFeedbackPercentage}
+        <StyledContainer>
+          <Section title="Please leave feedback">
+            <FeedbackOptions
+              options={state}
+              onLeaveFeedback={handleFeedbackIncrement}
             />
-          ) : (
-            <Notification message="There is no feedback" />
-          )}
-        </Section>
+          </Section>
+          <Section title="Statistics">
+            {countTotalFeedback() ? (
+              <Statistics
+                good={good}
+                neutral={neutral}
+                bad={bad}
+                total={countTotalFeedback()}
+                positivePercentage={countPositiveFeedbackPercentage()}
+              />
+            ) : (
+              <Notification message="There is no feedback" />
+            )}
+          </Section>
+        </StyledContainer>
       </Wrapper>
     );
   }
